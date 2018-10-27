@@ -1,0 +1,107 @@
+<html>
+
+<head>
+  
+    <title>Odoo SignUp Form</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+    <style>
+    	.container-cap{
+    display: flex;
+    flex-direction: row;
+}
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-01 p-t-100 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Odoo SignUp Form</h2>
+                    <form method="POST">
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Name" name="name">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="email" placeholder="Email" name="email">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="password" placeholder="Password" name="password">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="password" placeholder="Confirm Password" name="c_password">
+                        </div>
+                        <div class="container-cap">
+	                        <div class="input-group col-md-6 ">
+	                            <input class="input--style-3 text-center " id="real_cap" type="text" value="CAPTCHA" name="captcha" style="padding-left:15px;float: left;display:inline-block;font-family: 'MyWebFont', Annifont, sans-serif;color:#000;background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/04wl7Vx/4k-golden-light-background-3_vjc1ohzvl__F0000.png');" readonly>
+	                        </div>
+	                        <div>
+	                            <button type="button" id="regen" class="btn" style="font-size: 30px;"><i class="fa fa-refresh"></i></button>
+	                        </div>
+                    	</div>
+                    	 <div class="input-group">
+                            <input class="input--style-3" id="captcha_data"  placeholder="Enter Captcha ..." required>
+                        </div>
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" id="signup" type="submit">SignUp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script>
+    	$(document).ready(function(){
+    		function removeSpaces(string){
+                    return string.split(' ').join('');
+            }
+
+            function create_captcha_onload(){
+            	var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9');
+
+            	for(var i=0;i<6;i++){
+                   var a = alpha[Math.floor(Math.random() * alpha.length)];
+                   var b = alpha[Math.floor(Math.random() * alpha.length)];
+                   var c = alpha[Math.floor(Math.random() * alpha.length)];
+                   var d = alpha[Math.floor(Math.random() * alpha.length)];
+                   var e = alpha[Math.floor(Math.random() * alpha.length)];
+                   var f = alpha[Math.floor(Math.random() * alpha.length)];
+                   }
+                    var res = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' '+ f ;
+                    $('#real_cap').attr('value',res);
+
+            }
+            create_captcha_onload();
+    		$('#signup').click(function(){
+    			var cap_data = removeSpaces($('#captcha_data').val());
+    			var real_cap = removeSpaces($('#real_cap').val());
+    			if(cap_data == real_cap){
+    				alert('Yes This is Correct Captcha Data ..!!');
+    			}
+    			else{
+    				alert('Sorry  ..!!');
+    			}
+    			
+    		});
+    		$('#regen').click(function(){
+    			create_captcha_onload();	
+    		});
+    	});
+    </script>
+
+</body>
+
+</html>
